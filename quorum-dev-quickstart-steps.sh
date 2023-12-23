@@ -12,7 +12,7 @@ npm -v
 # Add Docker's official GPG key:
 # Add Docker's official GPG key:
 sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
+sudo apt-get install ca-certificates curl gnupg -y
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -23,9 +23,9 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 sudo usermod -aG docker $USER
-## YOU NEED TO LOGOUT AND LOGIN BACK
+newgrp docker
 npm install --save-dev hardhat
 wget https://github.com/ethereum/solidity/releases/download/v0.5.17/solc-static-linux
 chmod +x solc-static-linux
@@ -33,8 +33,8 @@ sudo cp solc-static-linux /usr/bin/
 sudo cp solc-static-linux /usr/local/bin
 npx quorum-dev-quickstart
 cd quorum-test-network
-./run.sh
 ## YOU NEED TO ENTER FEW DETAILS TO SETUP QUORUM
+./run.sh
 cd ..
 git clone https://github.com/Consensys/cakeshop.git
 cd cakeshop/quorum-dev-quickstart
