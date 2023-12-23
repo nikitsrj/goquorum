@@ -126,4 +126,38 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0xc9c
 
 ## dApp (UI and SmartContract) Development and Demo in Action
 
-This is a simple Hello World Application
+This is a simple Hello World Application written in solidity and react. Please follow the instruction to setup and use the application. <br>
+
+
+**Pre-requisites**
+- Node.js 
+- Truffle
+- solidity
+- Ganache
+- Metamask
+
+**Ganache and Metamask Setup**
+
+- Install Metamask in the browser <br>
+- Start Ganache local test ethereum network and import the wallet in metamask by passing the mnemonic of ganache<br>
+- Create a network in metamask wallet by entering the rpc url of ganache and chain id. And switch from ethereum main net to local ganache network.
+We will be able to see the fake ethereum amount for testing our app
+
+```
+cd dApp-smartcontract-blockchain
+truffle compile
+truffle migrate
+cd frontend
+npm install
+npm start
+```
+Go to the browser and hit http://localhost:3000<br>
+
+Enter the message in `Update Message` text box and click on `Update`<br>
+![Screenshot](appenter.png)
+
+Post that we will see Metamask popup and it will ask to confirm the transaction<br>
+![Screenshot](metamaskaccept.png) ![Screenshot](confirmtranscation.png)
+
+Once we will click on Confirm then the message will be updated in the site after the successfull transaction<br>
+![Screenshot](update.png)
