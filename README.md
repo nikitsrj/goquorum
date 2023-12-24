@@ -144,6 +144,7 @@ This is a simple Hello World Application written in solidity and react. Please f
 We will be able to see the fake ethereum amount for testing our app
 
 ```
+git clone https://github.com/nikitsrj/dApp-smartcontract-blockchain.git
 cd dApp-smartcontract-blockchain
 truffle compile
 truffle migrate
@@ -162,3 +163,33 @@ Post that we will see Metamask popup and it will ask to confirm the transaction<
 
 Once we will click on Confirm then the message will be updated in the site after the successfull transaction<br>
 ![Screenshot](update.png)
+
+## DevSecOps
+
+In this section we will see CI/CD stages along with security tools integrationat every stages.<br>
+
+When it comes to a production grade cloudnative DevSecOps pipeline for microservice based application(web2.0) it typically looks like following <br>
+![Screenshot](DSO-SASTDAST.jpg)
+
+The stack includes following tool chains.
+- SCM: AWS CodeCommit
+- Security Advisory for Scource Code Vulnerability(IDE Plugin): Snyk
+- Pre-commit secret check: Talisman(Installed in developers laptop)/git-secrets(part of build stages)
+- Build Tools: AWS CodeBuild, CodePipeline
+- SCA and SAST: Anchore, SonarQube
+- Docker image scanning: AWS ECR scanner
+- Artifact or Registry: AWS ECR
+- secret store: AWS Secrets
+- DAST: OWASP ZAP
+- Security Reports and Alerts management: Security Hub, AWS System Manager Ops center
+- Chaos engineering: AWS Fault Injection Simulator
+- Canary deployment: Flagger
+- RASP: Falco
+- AIOps: AWS DevOps guru
+
+I have delivered this pipeline in my previous organizations<br>
+
+Since the usecase here is for web3.0, and for demo purpose the DevSecOps pipeline will look like this.
+
+
+
