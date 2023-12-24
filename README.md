@@ -147,6 +147,7 @@ We will be able to see the fake ethereum amount for testing our app
 cd dApp-smartcontract-blockchain
 truffle compile
 truffle migrate
+truffle test
 cd frontend
 npm install
 npm start
