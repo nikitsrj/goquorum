@@ -58,7 +58,7 @@ This schematic representation illustrates the interaction between Validator, Mem
 **Quick Setup in an AWS EC2 instance** 
 
 Quorum dev quickstart provides the steps to simply setup a 7 node blockchain network. This 7 node will be running as container in a single VM.<br>
-Spin up an EC2 instance of 8 core and 32 GB RAM(t2.2xlarge), ubuntu with 80GB storage. For testing purpose pls open all the ports to your home IP.<br>
+I provisioned an EC2 instance of 8 core and 32 GB RAM(t2.2xlarge), ubuntu with 80GB storage. For testing purpose I have opened all the ports to my home IP.<br>
 
 Take a look at the `quorum-dev-quickstart-steps.sh` file
 
@@ -68,7 +68,7 @@ Take a look at the `quorum-dev-quickstart-steps.sh` file
 - In addition, there are three member pairs (GoQuorum and Tessera sets) to simulate private nodes on the network.<br>
 - Apart from these, there are some explorer, logging and monitoring components like chainlens, Web Explorer, blockscout, Loki, Prometheus and Grafana.<br>
 
-We installed cakeshop to interact with the quorum network via UI.<br>
+I installed cakeshop to interact with the quorum network via UI.<br>
 The installation step is mentioned in `quorum-dev-quickstart-steps.sh` file.<br>
 
 So the list of endpoint for this quickstart setup will be like following.
@@ -82,6 +82,23 @@ So the list of endpoint for this quickstart setup will be like following.
 - Grafana address                                : http://localhost:3000/d/a1lVy7ycin9Yv/goquorum-overview?orgId=1&refresh=10s&from=now-30m&to=now&var-system=All<br>
 - Collated logs using Grafana and Loki           : http://localhost:3000/d/Ak6eXLsPxFemKYKEXfcH/quorum-logs-loki?orgId=1&var-app=quorum&var-search=<br>
 - Cakeshop                                       : http://localhost:8999<br>
+
+
+### Production Setup Consideration:
+
+1. Infrastructure Layer:
+    - Having Multiple Environments
+    - Deploy it in Container Platform like Kubernetes
+    - Better to deploy on Cloud for leveraging managed services
+2. Quorum Layer:<br>
+    a. Account/Key management: Better to use `account plugins` for key management which allows us to extend GoQuorum to manage keys with `hashicorp-vault`.<br>
+    b. Transaction Management: By default the transaction manager is configured with HTTP. But for production its recommended to use `HTTP connection using TLS`. When it comes to gas, it is something that can be enabled or disabled based on business use cases.<br> 
+    c. Smart Contract Management: Version the smart contract to a dedicated registry and keep track of the logs. <br>
+    d. Consensus Management: Choose appropriate consensus protocol based on use cases, and make sure the number of nodes are available to achieve HA.<br>
+    e. Monitoring and Logging: Enable appropriate monitoring on node health and transaction also enable logging and its management like archiving or analytics on logs.<br>
+    f. Multitenancy: To achieve multitenancy, we need to configure authorization server like Okta.<br>
+    g. Transaction Sentry: Enable `revert reason` in goquorum node so that EVM passes back to the client an optional string message containing information about the error.<br>
+    h. Back and restore: Plan and test the back and restore on GoQuorum nodes.<br>
 
 ## GETH API and Blockchain Transaction Demonstration
 
