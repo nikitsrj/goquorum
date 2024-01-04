@@ -3,8 +3,6 @@
 # Goquorum
 This repository includes goquorum quicksetup on a single Node VM as well as on K8S. It also includes the interaction with the network using GETH. Post that it includes how to create a dAPP and deploy it in local network and how we can leverage on some devsecops toolchain for automated and secure deployment of dApp. At the end we will cover the production grade consideration for GoQuorum Network.
 
-> Please Note that this repository code and script will include some manual inputs, so its not a fully automated system for the deployment. Please do look out for comment in the scripts since this repository is for demo purpose
-
 # Table of contents
 1. [Quorum Blockchain Network](#quorum-blockchain-network)
 2. [GETH API and Blockchain Transaction Demonstration](#geth-api-and-blockchain-transaction-demonstration)
