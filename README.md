@@ -12,6 +12,7 @@ This repository includes goquorum quicksetup on a single Node VM as well as on K
 4. [DevSecOps](#devsecops)
 5. [GoQuorum BlockChain network on Kubernetes Cluster](#goquorum-blockchain-network-on-kubernetes-cluster)
 6. [Secure, Resilient & HA Infrastructure](#secure-resilient--ha-infrastructure)
+7. [Infosec and Monitoring(SIEM)](#Infosec-and-Monitoring)
 
 ## Quorum Blockchain Network
 
@@ -338,7 +339,7 @@ A private k8s cluster looks like below.
 ![Screenshot](blockchainSIEM.jpg)
 
 
-**This is a high level diagram for SIEM system for Hybrid Blockchain Network. Following are the consideration points while designing the SIEM system**
+**This is a high level diagram for SIEM system for Hybrid cloud Blockchain Network. Following are the consideration points while designing the SIEM system**
 - All the kubernetes cluster whether its managed or in on-prem it will have fluentd installed, and enable the cluster logging for core kubernetes master plane logs. This way we will be able to gather the k8s nodes logs as well as blockchain pod logs
 - The kubernetes node related logs should be directod in one folder while the blockchain event logs in another.
 - All the different cloud object storage logs should be transferred to a central location which will be source of SIEM tool.
