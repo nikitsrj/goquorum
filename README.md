@@ -26,17 +26,34 @@ Primary Features
 
 **Basic Architecture**
 
-<img src="https://docs.goquorum.consensys.io/assets/images/Quorum%20Design-0b8564f1a845d87d0679b057df55561b.png" height="300" width="600"/>
+The system architecture of a basic quorum network looks somthing like this
 
-- Quorum Node: Allows voting based consensus mechanism instead of proof of work and allowing transaction and smart contract to be privately executed
-- Constellation: Implements the privacy feature of Quorum
-    1. A transaction manager stores and allows access to encrypted transaction data, exchanges encrypted payloads with other participants' transaction manager, but don't have access to any sensitive private key. 
+![Screenshot](quorum-basic.jpg)
+
+
+where the role of each node is mentioned below:
+
+1. **Boot Node**: Boot nodes serve as network entry points for new nodes joining the Quorum network. They maintain the list of active nodes in the network, providing information to new nodes about the existing network topology. Boot nodes facilitate the initial connection and discovery process for nodes joining the network.
+2. **Voting Node**: Voting nodes participate in the consensus process by validating and confirming transactions. They play a crucial role in reaching an agreement on the state of the blockchain. In Quorum's consensus mechanism, such as QuorumChain.
+3. **Constellation Node**: These nodes handle private transactions using the Constellation protocol. They are responsible for encrypting and decrypting private data exchanged between parties involved in private transactions. Constellation nodes ensure the confidentiality and privacy of sensitive information shared on the Quorum blockchain.
+4. **Block Maker Node**: Block maker nodes are responsible for creating new blocks by packaging validated transactions. These nodes propose new blocks to be added to the blockchain. They collect transactions, form blocks, and broadcast them to other nodes for validation. 
+5. **Transaction Node**: Transaction nodes process transactions by executing smart contracts and updating the blockchain's state. They participate in the validation of transactions and smart contract interactions across the network.
+6. **Permissioning Node**: Permissioning nodes manage the access control and permissions within the Quorum network. They enforce rules related to node participation, privacy, and network access, ensuring that only authorized entities can join or perform specific actions on the blockchain.
+
+When it comes to the deployment of GoQourum network, we generally have following nodes and each nodes aligns with the role that mentioned above. The following diagram depicting the components after deploying it in an environment.
+
+![Screenshot](goquorum-basic.jpg)
+
+This schematic representation illustrates the interaction between Validator, Member, and RPC nodes within the Quorum blockchain network.
+
+1. **Validator Node**: Responsible for participating in the consensus mechanism and confirming transactions.
+2. **Member Node**: Includes various types of nodes like **Constellation(Privacy Manager Tessera)**, Transaction, and other nodes performing different functions within the network.
+3. **RPC Node**: Acts as an interface for external interaction, providing APIs for remote access to the Quorum blockchain network.
+
+> Quorum Node: Allows voting based consensus mechanism instead of proof of work and allowing transaction and smart contract to be privately executed<br>
+> Constellation: Implements the privacy feature of Quorum<br>
+    1. A transaction manager stores and allows access to encrypted transaction data, exchanges encrypted payloads with other participants' transaction manager, but don't have access to any sensitive private key.<br> 
     2. Enclave works with the transaction manager to strengthen the privacy by managing encryption and decryption in an isolated way. The enclave stores private keys and is essentially a virtual HSM or hardware security module which is an encryption method 
-
-Private Transaction workflow between where A and B are party of the transaction and C is not.
-
-<img src="https://docs.goquorum.consensys.io/assets/images/PrivateTxnFlow-4be49699f8855987f6e8dfd56a950b1a.png" height="600" width="600"/>
-
 
 **Quick Setup in an AWS EC2 instance** 
 
@@ -47,9 +64,9 @@ Take a look at the `quorum-dev-quickstart-steps.sh` file
 
 
 **This setup will create following components:**
-- Four GoQuorum IBFT validator nodes and a RPC non-validator node are created to simulate a base network.<br>
+- Four IBFT validator nodes and a RPC node are created to simulate a base network.<br>
 - In addition, there are three member pairs (GoQuorum and Tessera sets) to simulate private nodes on the network.<br>
-- Apart from these, there are some management and monitoring components like chainlens, Web Explorer, blockscout, Loki, Prometheus and Grafana.<br>
+- Apart from these, there are some explorer, logging and monitoring components like chainlens, Web Explorer, blockscout, Loki, Prometheus and Grafana.<br>
 
 We installed cakeshop to interact with the quorum network via UI.<br>
 The installation step is mentioned in `quorum-dev-quickstart-steps.sh` file.<br>
@@ -224,6 +241,10 @@ The stack includes following tool chains.
 **Infrastructure Layer**
 
 - To deploy a Quorum Blockchain network we can leverage on **Kubernetes** Platform. For a production grade K8s cluster, we have to consider the following points.
+A private k8s cluster looks like below.
+
+![Screenshot](k8s-quorum.jpg)
+
     - Network Layer:
         - Have a single public subnet and three private subnet to span across multi-AZ
         - Single Public Subnet is because of having Kubectl node, and public ELB
@@ -260,9 +281,7 @@ The stack includes following tool chains.
         - If needed, we can setup Blue-Green Kubernetes cluster, cause it may be required during EKS upgrade.
         - For backup and recovery we can leverage on velero.
 
-A private k8s cluster looks like below.
 
-![Screenshot](k8s-quorum.jpg)
 
 **Quorum Layer**
 
