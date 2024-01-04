@@ -173,6 +173,7 @@ This is a simple Hello World Application written in solidity and react. Please f
 - Node.js 
 - Truffle
 - solidity
+- Ether.js
 - Ganache
 - Metamask
 
@@ -231,7 +232,11 @@ I have delivered this pipeline in my previous organizations.<br>
 
 **We can also use some of the above tools in web3.0 wherever applicable and add the below mentioned tools for web3.0 for secure Pipeline<br>**
 
-Since the usecase here is for web3.0, and for demo purpose and keeping startup contraints in mind the DevSecOps pipeline will look like this.
+Since the usecase here is for web3.0, this is an ideal DevSecOps pipeline would look like for me.
+
+![Screenshot](DSO-QUORUM-highlevel.jpg)
+
+and for demo purpose and keeping startup contraints in mind the DevSecOps pipeline is something like this.
 
 ![Screenshot](DSO-QUORUM.jpg)
 
@@ -325,3 +330,18 @@ A private k8s cluster looks like below.
         - Use mTLS authentication with Tessera's dependencies.
         - Store encryption keys in secure environments and support key rotation and in different and isolated environment.
         - Upgrade Tessera frequently, and use an immutable strategy when upgrading.
+
+## Infosec and Monitoring
+
+### SIEM in blockchain
+
+![Screenshot](blockchainSIEM.jpg)
+
+
+**This is a high level diagram for SIEM system for Hybrid Blockchain Network. Following are the consideration points while designing the SIEM system**
+- All the kubernetes cluster whether its managed or in on-prem it will have fluentd installed, and enable the cluster logging for core kubernetes master plane logs. This way we will be able to gather the k8s nodes logs as well as blockchain pod logs
+- The kubernetes node related logs should be directod in one folder while the blockchain event logs in another.
+- All the different cloud object storage logs should be transferred to a central location which will be source of SIEM tool.
+- When it comes to the central location storage, if its in cloud, then we should consider having multicloud connectivity like transit gateway.
+- When it comes to SIEM tool, we can leverage on Splunk/ELK or Prometheus+Grafana which is opensource.
+
