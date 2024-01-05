@@ -15,13 +15,6 @@ This repository includes goquorum quicksetup on a single Node VM as well as on K
 ## Quorum Blockchain Network
 
 ### Quorum
-A soft fork of the public Ethereum Blockchain
-
-Primary Features
-- Privacy. Transactions and smart contracts on the blockchain can be private.
-- Voting-based consensus mechanisms. Raft-based and Istanbul Byzantine Fault Tolerance (BFT) consensus mechanisms.
-- Peer/node permissioning using smart contracts, which ensures that only known parties can join the network
-- Increased scalability and network performance.
 
 **Basic Architecture**
 
@@ -49,10 +42,7 @@ This schematic representation illustrates the interaction between Validator, Mem
 2. **Member Node**: Includes various types of nodes like **Constellation(Privacy Manager Tessera)**, Transaction, and other nodes performing different functions within the network.
 3. **RPC Node**: Acts as an interface for external interaction, providing APIs for remote access to the Quorum blockchain network.
 
-> Quorum Node: Allows voting based consensus mechanism instead of proof of work and allowing transaction and smart contract to be privately executed<br>
-> Constellation: Implements the privacy feature of Quorum<br>
-    1. A transaction manager stores and allows access to encrypted transaction data, exchanges encrypted payloads with other participants' transaction manager, but don't have access to any sensitive private key.<br> 
-    2. Enclave works with the transaction manager to strengthen the privacy by managing encryption and decryption in an isolated way. The enclave stores private keys and is essentially a virtual HSM or hardware security module which is an encryption method 
+
 
 **Quick Setup in an AWS EC2 instance** 
 
@@ -93,15 +83,13 @@ So the list of endpoint for this quickstart setup will be like following.
     a. Account/Key management: Better to use `account plugins` for key management which allows us to extend GoQuorum to manage keys with `hashicorp-vault`.<br>
     b. Transaction Management: By default the transaction manager is configured with HTTP. But for production its recommended to use `HTTP connection using TLS`. When it comes to gas, it is something that can be enabled or disabled based on business use cases.<br> 
     c. Smart Contract Management: Version the smart contract to a dedicated registry and keep track of the logs. <br>
-    d. Consensus Management: Choose appropriate consensus protocol based on use cases, and make sure the number of nodes are available to achieve HA.<br>
+    d. Consensus Management: Choose appropriate consensus protocol based on use cases, preferably QBFT, and make sure the number of nodes are available to achieve HA.<br>
     e. Monitoring and Logging: Enable appropriate monitoring on node health and transaction also enable logging and its management like archiving or analytics on logs.<br>
     f. Multitenancy: To achieve multitenancy, we need to configure authorization server like Okta.<br>
     g. Transaction Sentry: Enable `revert reason` in goquorum node so that EVM passes back to the client an optional string message containing information about the error.<br>
-    h. Back and restore: Plan and test the back and restore on GoQuorum nodes.<br>
+    h. Backup and restore: Plan and test the backup and restore on GoQuorum nodes.<br>
 
 ## GETH API and Blockchain Transaction Demonstration
-
-There are steps at the end in `quorum-dev-quickstart-steps.sh` file, which will install `geth` cli in the same VM<br>
 
 There are multiple ways to interact with BlockChain Network API, one is via `curl` and another is via `geth` js interactive.
 
