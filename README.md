@@ -18,7 +18,7 @@ This repository includes goquorum quicksetup on a single Node VM as well as on K
 
 **Basic Architecture**
 
-The system architecture of a basic quorum network looks somthing like this
+A conceptual component diagram of a basic quorum network looks something like this
 
 ![Screenshot](quorum-basic.jpg)
 
