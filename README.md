@@ -49,8 +49,6 @@ This schematic representation illustrates the interaction between Validator, Mem
 Quorum dev quickstart provides the steps to simply setup a 7 node blockchain network. This 7 node will be running as container in a single VM.<br>
 I provisioned an EC2 instance of 8 core and 32 GB RAM(t2.2xlarge), ubuntu with 80GB storage. For testing purpose I have opened all the ports to my home IP.<br>
 
-Take a look at the `quorum-dev-quickstart-steps.sh` file
-
 
 **This setup will create following components:**
 - Four IBFT validator nodes and a RPC node are created to simulate a base network.<br>
